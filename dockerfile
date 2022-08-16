@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 RUN apt update
+RUN apt install -y default-jdk
 RUN apt install -y git
 RUN useradd -m -U -d /opt/tomcat -s /bin/false tomcat
 RUN cd /tmp && git clone https://github.com/egorov060/docker.git
@@ -15,8 +16,3 @@ ENV CLASSPATH:       /opt/apache-tomcat-10.0.23t/bin/bootstrap.jar:/opt/apache-t
 ADD /target/hello-1.0.war /opt/apache-tomcat-10.0.23/webapps/hello-1.0.war
 EXPOSE 8080
 CMD ["/opt/apache-tomcat-10.0.23/bin/catalina.sh", "run", "java","bash"]
-###############
-#FROM tomcat:latest
-#USER node
-#ADD /target/hello-1.0.war /usr/local/tomcat/webapps/
-#CMD ["catalina.sh" "run"]
